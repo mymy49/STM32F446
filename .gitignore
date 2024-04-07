@@ -1,0 +1,7 @@
+*.hzs
+/.settings
+*.launch
+/Debug/
+/Release/
+/STM32F446RE THUMB Debug/
+/STM32F446RE THUMB Release/
