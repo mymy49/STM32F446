@@ -21,37 +21,23 @@
 	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include <yss.h>
-#include <bsp.h>
+#ifndef DEV_LED__H_
+#define DEV_LED__H_
 
-void thread_blinkLed(void);
+#include <stdint.h>
 
-int main(void)
+namespace Led
 {
-	// 운영체체 초기화
-	initializeYss();
-	
-	// 보드 초기화
-	initializeBoard();
-	
-	// LED 깜박이는 쓰레드를 스케줄러에 등록
-	thread::add(thread_blinkLed, 512);
+	// LED를 초기화 한다.
+	void initialize(void);
 
-	while(1)
-	{
-		thread::yield();
-	}
+	// LED를 ON/OFF 한다.
+	//
+	// bool en
+	//		LED의 상태를 설정한다. (true - 켜기, false - 끄기)
+	// uint32_t fadeTime
+	//		fade in 또는 fade out을 하는 지속시간을 ms 단위로 설정한다.
+	void on(bool en, uint32_t fadeTime = 100);
 }
 
-void thread_blinkLed(void)
-{
-	while(1)
-	{
-		Led::on(true, 400);
-		thread::delay(500);
-
-		Led::on(false, 400);
-		thread::delay(500);
-	}
-}
-
+#endif

@@ -37,7 +37,7 @@
 // ####################### 스케줄러 설정 #######################
 // runtime 함수를 지원할 PWM 장치 설정 (RUNTIME_TIM2 ~ RUNTIME_TIM14)
 // RUNTIME_TIM1, RUNTIME_TIM6, RUNTIME_TIM7, RUNTIME_TIM8, RUNTIME_TIM10, RUNTIME_TIM13은 사용이 불가능 합니다.
-#define YSS_TIMER			RUNTIME_TIM2
+#define YSS_TIMER			RUNTIME_TIM5
 
 // 쓰레드당 할당 받는 Systick Clock의 수
 #define THREAD_GIVEN_CLOCK	20000
@@ -103,7 +103,7 @@
 
 // PWM 활성화
 #define PWM1_ENABLE			false
-#define PWM2_ENABLE			false
+#define PWM2_ENABLE			true
 #define PWM3_ENABLE			false
 #define PWM4_ENABLE			false
 #define PWM5_ENABLE			false
@@ -155,7 +155,7 @@
 
 // UART 활성화
 #define USART1_ENABLE		false
-#define USART2_ENABLE		false
+#define USART2_ENABLE		true
 #define USART3_ENABLE		false
 #define UART4_ENABLE		false
 #define UART5_ENABLE		false

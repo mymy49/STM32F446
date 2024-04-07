@@ -21,37 +21,28 @@
 	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include <yss.h>
-#include <bsp.h>
+#ifndef DEV_KEY__H_
+#define DEV_KEY__H_
 
-void thread_blinkLed(void);
+#include <stdint.h>
 
-int main(void)
+namespace Key
 {
-	// 운영체체 초기화
-	initializeYss();
+	// Key를 초기화 한다.
+	void initialize(void);
 	
-	// 보드 초기화
-	initializeBoard();
-	
-	// LED 깜박이는 쓰레드를 스케줄러에 등록
-	thread::add(thread_blinkLed, 512);
+	// 파란색 User 버튼의 현재 상태를 얻는다.
+	//
+	// 반환
+	//		버튼이 눌렸을 경우 true, 안눌렸을 경우 false를 반환한다.
+	bool getUser(void);
 
-	while(1)
-	{
-		thread::yield();
-	}
+	// 전체 버튼 중에 하나라도 눌리면 true를 반환한다.
+	//
+	// 반환
+	//		버튼이 눌렸을 경우 true, 안눌렸을 경우 false를 반환한다.
+	bool getAnyKey(void);
+
 }
 
-void thread_blinkLed(void)
-{
-	while(1)
-	{
-		Led::on(true, 400);
-		thread::delay(500);
-
-		Led::on(false, 400);
-		thread::delay(500);
-	}
-}
-
+#endif

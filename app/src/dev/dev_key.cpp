@@ -21,37 +21,26 @@
 	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#include <dev/key.h>
 #include <yss.h>
 #include <bsp.h>
+#include <util/Period.h>
 
-void thread_blinkLed(void);
-
-int main(void)
+namespace Key
 {
-	// 운영체체 초기화
-	initializeYss();
-	
-	// 보드 초기화
-	initializeBoard();
-	
-	// LED 깜박이는 쓰레드를 스케줄러에 등록
-	thread::add(thread_blinkLed, 512);
-
-	while(1)
+	void initialize(void)
 	{
-		thread::yield();
+		// gpio의 기본 상태가 입력상태이므로 특별히 초기화가 필요하지 않다.
 	}
-}
 
-void thread_blinkLed(void)
-{
-	while(1)
+	bool getUser(void)
 	{
-		Led::on(true, 400);
-		thread::delay(500);
+		return !gpioC.getInputData(13);
+	}
 
-		Led::on(false, 400);
-		thread::delay(500);
+	bool getAnyKey(void)
+	{
+		return (getUser());
 	}
 }
 
