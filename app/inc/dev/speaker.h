@@ -21,46 +21,25 @@
 	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include <dev/key.h>
-#include <yss.h>
-#include <bsp.h>
-#include <util/Period.h>
+#ifndef DEV_SPEAKER__H_
+#define DEV_SPEAKER__H_
 
-namespace Key
+#include <stdint.h>
+#include <yss/error.h>
+
+namespace Speaker
 {
-	void initialize(void)
-	{
-		// gpio의 기본 상태가 입력상태이므로 특별히 초기화가 필요하지 않다.
-	}
-
-	bool getLeft(void)
-	{
-		return !gpioC.getInputData(0);
-	}
-
-	bool getRight(void)
-	{
-		return !gpioC.getInputData(1);
-	}
-
-	bool getCancel(void)
-	{
-		return !gpioC.getInputData(2);
-	}
-
-	bool getEnter(void)
-	{
-		return !gpioC.getInputData(3);
-	}
-
-	bool getUser(void)
-	{
-		return !gpioC.getInputData(13);
-	}
-
-	bool getAnyKey(void)
-	{
-		return (getUser() || getLeft() || getRight() || getCancel() || getEnter());
-	}
+	// Speaker를 초기화 한다.
+	void initialize(void);
+	
+	// 16 kHz 샘플 / Mono / 16 Bit PCM *.WAV 파일 데이터를 재생한다.
+	// 내장 Flash에 저장된 Bin to Source 프로그램으로 파일이 통으로 포함된 형태의 것으로 한정한다.
+	//
+	// 반환
+	//		에러를 반환한다.
+	// const void *src
+	//		*.WAV의 포인터를 설정한다.
+	error_t play(const void *src);
 }
 
+#endif

@@ -21,46 +21,54 @@
 	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include <dev/key.h>
+#include "../inc/task.h"
 #include <yss.h>
-#include <bsp.h>
-#include <util/Period.h>
+#include <util/key.h>
 
-namespace Key
+#define MAX_TASK_THREAD		4
+
+namespace Task
 {
-	void initialize(void)
+	uint32_t gThreadCnt;
+	threadId_t gThreadId[MAX_TASK_THREAD];
+	FunctionQueue *gFq;
+	Mutex gMutex;
+
+	void setFunctionQueue(FunctionQueue &obj)
 	{
-		// gpio의 기본 상태가 입력상태이므로 특별히 초기화가 필요하지 않다.
+		gFq = &obj;
 	}
 
-	bool getLeft(void)
+	void lock(void)
 	{
-		return !gpioC.getInputData(0);
+		gMutex.lock();
 	}
 
-	bool getRight(void)
+	void unlock(void)
 	{
-		return !gpioC.getInputData(1);
+		gMutex.unlock();
 	}
 
-	bool getCancel(void)
+	void addThread(void (*func)(void), uint32_t stackSize)
 	{
-		return !gpioC.getInputData(2);
+		if(gThreadCnt < MAX_TASK_THREAD)
+			gThreadId[gThreadCnt++] = thread::add(func, stackSize);
 	}
 
-	bool getEnter(void)
+	void clearTask(void)
 	{
-		return !gpioC.getInputData(3);
-	}
+		key::clear();
 
-	bool getUser(void)
-	{
-		return !gpioC.getInputData(13);
-	}
+		for(uint32_t i=0;i<gThreadCnt;i++)
+		{
+			if(gThreadId[i])
+			{
+				thread::remove(gThreadId[i]);
+				gThreadId[i] = 0;
+			}
+		}
 
-	bool getAnyKey(void)
-	{
-		return (getUser() || getLeft() || getRight() || getCancel() || getEnter());
+		gThreadCnt = 0;
 	}
 }
 

@@ -32,7 +32,7 @@
 // ####################### 외부 크리스탈 클럭 주파수 설정 #######################
 // 아래 HSE_CLOCK_FREQ가 정의 되어 있으면 HSE 클럭을 소스로 PLL 설정이 이뤄집니다.
 // 정의되어 있지 않으면 HSI 클럭을 소스로 PLL 설정이 이뤄집니다.
-//#define HSE_CLOCK_FREQ		8000000
+#define HSE_CLOCK_FREQ		8000000
 
 // ####################### 스케줄러 설정 #######################
 // runtime 함수를 지원할 PWM 장치 설정 (RUNTIME_TIM2 ~ RUNTIME_TIM14)
@@ -50,11 +50,11 @@
 
 // ####################### GUI 설정 #######################
 // GUI library Enable (true, false)
-#define USE_GUI				false
+#define USE_GUI				true
 
 // ####################### KEY 설정 #######################
 // 최대 KEY 생성 가능 갯수 설정 (0 ~ ), 0일 경우 기능 꺼짐
-#define NUM_OF_YSS_KEY		0
+#define NUM_OF_YSS_KEY		8
 
 // ###################### 주변 장치 활성화 ######################
 // 활성화 시킬 장치에 대해 false -> true로 변경하여 활성화 한다.
@@ -89,7 +89,7 @@
 #define CRC32_ENABLE		false
 
 // DAC 활성화
-#define DAC1_ENABLE			false
+#define DAC1_ENABLE			true
 
 // I2C 활성화
 #define I2C1_ENABLE			false
@@ -104,7 +104,7 @@
 // PWM 활성화
 #define PWM1_ENABLE			false
 #define PWM2_ENABLE			true
-#define PWM3_ENABLE			false
+#define PWM3_ENABLE			true
 #define PWM4_ENABLE			false
 #define PWM5_ENABLE			false
 #define PWM8_ENABLE			false
@@ -132,7 +132,7 @@
 #define SDMMC_DMA_TRX		DMA2_CH3	// DMA2_CH3, DMA2_CH6 가능
 
 // SPI 활성화
-#define SPI1_ENABLE			false
+#define SPI1_ENABLE			true
 #define SPI2_ENABLE			false
 #define SPI3_ENABLE			false
 #define SPI4_ENABLE			false
@@ -144,7 +144,7 @@
 #define TIM4_ENABLE			false
 #define TIM5_ENABLE			false
 #define TIM6_ENABLE			false
-#define TIM7_ENABLE			false
+#define TIM7_ENABLE			true
 #define TIM8_ENABLE			false
 #define TIM9_ENABLE			false
 #define TIM10_ENABLE		false
