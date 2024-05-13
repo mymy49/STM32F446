@@ -43,6 +43,8 @@ namespace Task
 
 	void drawItem(uint8_t select)
 	{
+		frame.setFont(Font_Noto_Sans_CJK_HK_DemiLight_16);
+
 		if(select == 0)
 			lcd.drawBitmap({10, 10}, &Folder_s);
 		else
@@ -51,7 +53,6 @@ namespace Task
 		frame.setSize(110, 20);
 		frame.setBackgroundColor(0x00, 0x00, 0x00);
 		frame.setFontColor(0xFF, 0xFF, 0xFF);
-		frame.setFont(Font_Noto_Sans_CJK_HK_DemiLight_16);
 		frame.clear();
 		frame.drawStringToCenterAligned("파일 탐색기");
 		lcd.drawBitmap({10, 110}, frame.getBitmap());
@@ -64,7 +65,6 @@ namespace Task
 		frame.setSize(110, 20);
 		frame.setBackgroundColor(0x00, 0x00, 0x00);
 		frame.setFontColor(0xFF, 0xFF, 0xFF);
-		frame.setFont(Font_Noto_Sans_CJK_HK_DemiLight_16);
 		frame.clear();
 		frame.drawStringToCenterAligned("정보");
 		lcd.drawBitmap({130, 110}, frame.getBitmap());

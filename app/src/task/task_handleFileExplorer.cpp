@@ -36,7 +36,7 @@ namespace Task
 		lcd.clear();
 		lcd.setBrushColor(0x30, 0x30, 0x30);
 		lcd.fillRect(Position_t{15, 15}, Size_t{479-30, 319-30});
-//		clearListBox();
+		//clearListBox();
 
 		frame.setSize(200, 35);
 		frame.setFont(Font_Noto_Sans_CJK_HK_DemiLight_32);

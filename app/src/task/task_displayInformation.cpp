@@ -33,12 +33,9 @@ namespace Task
 {
 	static void drawPage(void)
 	{
-		Font font(Font_Noto_Sans_CJK_HK_DemiLight_14);
 		Color titleColor(0x30, 0x30, 0xFF);
 		Color bgColor(0x00, 0x00, 0x00);
 		Position_t pos;
-
-		font.setSpaceWidth(5);
 
 		// 배경색 칠하기
 		lcd.setBackgroundColor(titleColor);
@@ -64,7 +61,7 @@ namespace Task
 		// 본문 쓰기
 		frame.setSize(440, 20);
 		frame.setBackgroundColor(bgColor);
-		frame.setFont(font);
+		frame.setFont(Font_Noto_Sans_CJK_HK_DemiLight_14);
 		frame.setFontColor(0xFF, 0xFF, 0xFF);
 
 		pos.x = 20;
@@ -96,7 +93,7 @@ namespace Task
 
 	void thread_displayInformation(void)
 	{
-		bool anyKeyFlag = false;
+		volatile bool anyKeyFlag = false;
 
 		lcd.lock();
 		drawPage();
@@ -106,7 +103,7 @@ namespace Task
 		fadeinBackLight();		
 		
 		// key 이벤트에 등록한다.
-		key::addPushHandler(Key::getAnyKey, anyKeyFlag);
+		key::addPushHandler(Key::getAnyKey, (bool&)anyKeyFlag);
 
 		while(1)
 		{
