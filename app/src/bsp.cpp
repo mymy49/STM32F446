@@ -18,20 +18,18 @@ Pwm *gBlPwm;
 
 void initializeBoard(void)
 {
-	using namespace define::gpio;
-
 	// USART2 초기화
-	gpioA.setAsAltFunc(2, altfunc::PA2_USART2_TX);
-	gpioA.setAsAltFunc(3, altfunc::PA3_USART2_RX);
+	gpioA.setAsAltFunc(2, Gpio::PA2_USART2_TX);
+	gpioA.setAsAltFunc(3, Gpio::PA3_USART2_RX);
 	
 	usart2.enableClock();
 	usart2.initialize(115200, 128);
 	usart2.enableInterrupt();
 
 	// SPI1 초기화
-	gpioB.setAsAltFunc(3, altfunc::PB3_SPI1_SCK, ospeed::HIGH);
-	gpioB.setAsAltFunc(4, altfunc::PB4_SPI1_MISO, ospeed::HIGH);
-	gpioB.setAsAltFunc(5, altfunc::PB5_SPI1_MOSI, ospeed::HIGH);
+	gpioB.setAsAltFunc(3, Gpio::PB3_SPI1_SCK, Gpio::OSPEED_HIGH);
+	gpioB.setAsAltFunc(4, Gpio::PB4_SPI1_MISO, Gpio::OSPEED_HIGH);
+	gpioB.setAsAltFunc(5, Gpio::PB5_SPI1_MOSI, Gpio::OSPEED_HIGH);
 
 	spi1.enableClock();
 	spi1.initializeAsMain();
@@ -47,10 +45,10 @@ void initializeBoard(void)
 	Speaker::initialize();
 
 	// LCD 초기화
-	gpioB.setAsAltFunc(0, altfunc::PB0_TIM3_CH3);	// 백라이트
-	gpioB.setAsOutput(6, ospeed::HIGH);				// LCD_CS
-	gpioB.setAsOutput(10, ospeed::HIGH);			// LCD_DC
-	gpioA.setAsOutput(8);							// LCD_RST
+	gpioB.setAsAltFunc(0, Gpio::PB0_TIM3_CH3);	// 백라이트
+	gpioB.setAsOutput(6, Gpio::OSPEED_HIGH);	// LCD_CS
+	gpioB.setAsOutput(10, Gpio::OSPEED_HIGH);	// LCD_DC
+	gpioA.setAsOutput(8);						// LCD_RST
 	
 	gBlPwm = &pwm3Ch3;
 	gBlPwm->enableClock();

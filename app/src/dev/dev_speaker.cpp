@@ -52,8 +52,6 @@ namespace Speaker
 
 	void initialize(void)
 	{
-		using namespace define::gpio;
-
 		// PWM 초기화
 		gpioA.setAsAnalog(4);
 		

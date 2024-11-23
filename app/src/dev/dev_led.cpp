@@ -66,10 +66,8 @@ namespace Led
 
 	void initialize(void)
 	{
-		using namespace define::gpio;
-
 		// PWM 초기화
-		gpioA.setAsAltFunc(5, altfunc::PA5_TIM2_CH1);
+		gpioA.setAsAltFunc(5, Gpio::PA5_TIM2_CH1);
 
 		gPwm = &pwm2Ch1;	// TIM2 CH1
 		
