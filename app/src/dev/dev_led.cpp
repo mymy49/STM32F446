@@ -41,7 +41,7 @@ namespace Led
 				ratio += (float)(1.f / (float)FADE_STEP);
 
 				// PWM 출력 비율 설정
-				gPwm->setRatio(ratio);
+				gPwm->setDutyRatio(ratio);
 			}
 		}
 		else
@@ -57,7 +57,7 @@ namespace Led
 				ratio -= (float)(1.f / (float)FADE_STEP);
 
 				// PWM 출력 비율 설정
-				gPwm->setRatio(ratio);
+				gPwm->setDutyRatio(ratio);
 			}
 		}
 

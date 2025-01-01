@@ -22,8 +22,17 @@ void initializeBoard(void)
 	gpioA.setAsAltFunc(2, Gpio::PA2_USART2_TX);
 	gpioA.setAsAltFunc(3, Gpio::PA3_USART2_RX);
 	
+	Uart::config_t uart2Config = 
+	{
+		Uart::MODE_NORMAL,	//mode_t mode;
+		115200,				//uint32_t baudrate;
+		Uart::STOP_1BIT,	//stopbit_t stopbit;
+		nullptr,			//void *rcvBuf;
+		128					//uint32_t rcvBufSize;
+	};
+
 	usart2.enableClock();
-	usart2.initialize(115200, 128);
+	usart2.initialize(uart2Config);
 	usart2.enableInterrupt();
 
 	// SPI1 초기화
@@ -72,7 +81,7 @@ void initializeBoard(void)
 
 void setLcdBackLight(float dimming)
 {
-	gBlPwm->setRatio(dimming);
+	gBlPwm->setDutyRatio(dimming);
 }
 
 void fadeinBackLight(void)
